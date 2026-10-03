@@ -3,162 +3,395 @@
 <meta name="theme-color" content="#ffffff">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta name="referrer" content="strict-origin-when-cross-origin">
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
 <title>JAURA MUSIC</title>
+
 <style>
-*{box-sizing:border-box;margin:0;padding:0;font-family:Arial,sans-serif}
-body{background:#fff;color:#111}
-button,input{font-family:inherit}
-#splashScreen{position:fixed;inset:0;background:#080808;display:flex;justify-content:center;align-items:center;z-index:9999;transition:opacity .5s ease,visibility .5s}
-.splash-content{text-align:center;animation:zoomIn .8s ease-out}
-.splash-logo{width:200px;height:200px;border-radius:50%;box-shadow:0 0 35px rgba(160,32,240,.6);margin-bottom:25px;object-fit:cover}
-.splash-loader{width:38px;height:38px;margin:0 auto;border:3px solid rgba(160,32,240,.2);border-top:3px solid #b026ff;border-radius:50%;animation:spin 1s linear infinite}
-@keyframes zoomIn{from{transform:scale(.7);opacity:0}to{transform:scale(1);opacity:1}}
-@keyframes spin{0%{transform:rotate(0)}100%{transform:rotate(360deg)}}
-.header{height:72px;display:flex;align-items:center;justify-content:space-between;padding:0 18px;border-bottom:1px solid #eee;background:#fff}
-.logo{font-size:25px;font-weight:900;font-style:italic}
-.header-icons{display:flex;gap:20px;font-size:28px}
-.search-area{padding:14px 16px 7px;background:#fff}
-.search{height:54px;border:1px solid #ddd;border-radius:30px;display:flex;overflow:hidden;background:#fafafa}
-.search input{flex:1;border:0;outline:0;background:transparent;padding:0 19px;font-size:17px}
-.search button{width:64px;border:0;border-left:1px solid #ddd;background:#f3f3f3;font-size:23px;cursor:pointer}
-.categories{display:flex;gap:10px;overflow-x:auto;padding:9px 16px 16px;scrollbar-width:none;background:#fff}
-.categories::-webkit-scrollbar{display:none}
-.category{flex:none;padding:11px 19px;border-radius:13px;background:#f0f0f0;font-weight:bold;font-size:15px;cursor:pointer}
-.category.active{background:#111;color:#fff}
-#results{background:#fff}
-.video{margin-bottom:25px;cursor:pointer;background:#fff}
-.thumbnail-wrap{width:100%;position:relative;background:#111}
-.thumbnail{width:100%;aspect-ratio:16/9;object-fit:cover;display:block}
-.video-info{display:flex;gap:12px;padding:12px 15px 0}
-.channel{width:43px;height:43px;min-width:43px;border-radius:50%;background:#222;color:#fff;display:flex;align-items:center;justify-content:center;font-size:20px}
-.details{flex:1;min-width:0}.title-row{display:flex;gap:8px}.title{flex:1;font-size:16px;line-height:1.4;font-weight:bold}.more{font-size:23px}.meta{color:#666;font-size:12px;margin-top:6px}
-.loading{padding:35px 15px;text-align:center;color:#777;font-size:16px}.error{padding:30px 18px;text-align:center;color:#c00;line-height:1.5}.home-message{text-align:center;padding:45px 20px;color:#777}.home-message h2{color:#222;margin-bottom:8px}
-#player{display:none;position:fixed;inset:0;background:#000;color:#fff;z-index:100;overflow-y:auto}
-.player-top{height:62px;display:flex;align-items:center;justify-content:space-between;padding:0 15px;background:#000}
-.back{border:0;background:none;color:#fff;font-size:38px;width:50px;cursor:pointer}
-.devil-button{width:54px;height:54px;border-radius:50%;border:1px solid #444;background:#171717;color:#fff;font-size:28px;display:flex;align-items:center;justify-content:center;box-shadow:0 0 18px rgba(255,255,255,.15);cursor:pointer}
-.devil-button:active{transform:scale(.9)}
-.youtube-player{width:100%;aspect-ratio:16/9;background:#111}
-#ytFrame{width:100%;height:100%;border:none}
-.player-info{padding:17px}.player-info h2{font-size:20px;line-height:1.35}.player-info p{color:#888;margin-top:7px}.note{color:#777;font-size:12px;padding:0 18px 20px}
-.sound-panel{position:fixed;left:0;right:0;bottom:-100%;max-height:88vh;overflow-y:auto;background:#181818;color:#fff;padding:22px 20px 30px;border-radius:25px 25px 0 0;z-index:300;transition:.35s;box-shadow:0 -10px 40px #000}
-.sound-panel.show{bottom:0}.sound-head{display:flex;align-items:center;justify-content:space-between;margin-bottom:20px}.sound-head h2{font-size:21px}.close{width:40px;height:40px;border:0;border-radius:50%;background:#303030;color:#fff;font-size:18px;cursor:pointer}
-.slider{margin:20px 0}.slider-label{display:flex;justify-content:space-between;margin-bottom:9px;color:#ddd}.slider input{width:100%;accent-color:#fff}
-.equalizer{display:flex;justify-content:space-around;align-items:center;height:175px;background:#101010;border-radius:18px;padding:10px;overflow:hidden}
-.eq{height:150px;display:flex;flex-direction:column;align-items:center}.eq input{width:120px;transform:rotate(-90deg);margin-top:45px;accent-color:#fff}.eq span{margin-top:42px;font-size:9px;color:#888}
-.presets{display:flex;gap:8px;overflow-x:auto;padding-bottom:5px}.presets button{flex:none;padding:10px 15px;border:1px solid #444;border-radius:20px;background:#252525;color:#fff;cursor:pointer}.presets button.active{background:#fff;color:#000}
-@media(max-width:600px){.logo{font-size:21px}.header-icons{font-size:24px;gap:14px}.search input{font-size:15px}.title{font-size:15px}}
+*{
+    box-sizing:border-box;
+    margin:0;
+    padding:0;
+    font-family:Arial,sans-serif;
+}
+
+body{
+    background:#b30000;
+    color:#fff;
+}
+
+header{
+    padding:16px;
+    text-align:center;
+    background:#8b0000;
+    position:sticky;
+    top:0;
+    z-index:10;
+}
+
+.logo{
+    font-size:25px;
+    font-weight:bold;
+    margin-bottom:12px;
+}
+
+.search-box{
+    display:flex;
+    gap:8px;
+}
+
+.search-box input{
+    flex:1;
+    padding:12px;
+    border:none;
+    border-radius:8px;
+    outline:none;
+    font-size:15px;
+}
+
+.search-box button{
+    padding:12px 16px;
+    border:none;
+    border-radius:8px;
+    background:#fff;
+    color:#b30000;
+    font-weight:bold;
+    cursor:pointer;
+}
+
+.player-box{
+    width:100%;
+    background:#000;
+}
+
+.player-box iframe{
+    width:100%;
+    aspect-ratio:16/9;
+    border:0;
+    display:block;
+}
+
+.now-playing{
+    padding:12px;
+    background:#8b0000;
+    font-size:15px;
+    font-weight:bold;
+}
+
+#videoList{
+    padding:10px;
+}
+
+.video{
+    display:flex;
+    gap:10px;
+    margin-bottom:12px;
+    padding:8px;
+    background:#8b0000;
+    border-radius:10px;
+    cursor:pointer;
+}
+
+.video img{
+    width:130px;
+    height:74px;
+    object-fit:cover;
+    border-radius:7px;
+}
+
+.video-info{
+    flex:1;
+}
+
+.video-title{
+    font-size:14px;
+    font-weight:bold;
+    line-height:1.35;
+}
+
+.channel{
+    font-size:12px;
+    margin-top:7px;
+    opacity:.85;
+}
+
+.status{
+    text-align:center;
+    padding:20px;
+}
+
 </style>
 </head>
+
 <body>
 
-<div id="splashScreen"><div class="splash-content"><img src="https://i.ibb.co.com/r2cGS8H4/1000012185.jpg" alt="JAURA MUSIC Logo" class="splash-logo"><div class="splash-loader"></div></div></div>
+<header>
+    <div class="logo">😈 JAURA MUSIC</div>
 
-<header class="header"><div class="logo">JAWRA MUSIC</div><div class="header-icons"><span>⌕</span><span>⋮</span></div></header>
+    <div class="search-box">
+        <input id="searchInput" type="text" placeholder="YouTube ভিডিও সার্চ করো...">
+        <button onclick="searchVideos()">SEARCH</button>
+    </div>
+</header>
 
-<div class="search-area"><div class="search"><input id="searchInput" type="text" placeholder="গান বা ভিডিও সার্চ করুন..." onkeydown="searchEnter(event)"><button onclick="searchMusic()">🔍</button></div></div>
-
-<div class="categories">
-<div class="category active" onclick="categorySearch('')">All</div>
-<div class="category" onclick="categorySearch('Music')">Music</div>
-<div class="category" onclick="categorySearch('Mix')">Mixes</div>
-<div class="category" onclick="categorySearch('Lo-fi')">Lo-fi</div>
-<div class="category" onclick="categorySearch('DJ')">DJ</div>
-<div class="category" onclick="categorySearch('Relax')">Relax</div>
-<div class="category" onclick="categorySearch('Bangla')">Bangla</div>
+<div class="player-box">
+    <iframe
+        id="player"
+        src=""
+        allow="autoplay; encrypted-media; picture-in-picture"
+        allowfullscreen>
+    </iframe>
 </div>
 
-<div id="results"><div class="home-message"><h2>JAWRA MUSIC</h2><p>গান খুঁজতে উপরের Search ব্যবহার করুন</p></div></div>
-
-<div id="player">
-<div class="player-top"><button class="back" onclick="closePlayer()">‹</button><button class="devil-button" onclick="openSound()">😈</button></div>
-<div class="youtube-player"><iframe id="ytFrame" src="" allow="autoplay; encrypted-media; picture-in-picture; fullscreen" allowfullscreen referrerpolicy="strict-origin-when-cross-origin"></iframe></div>
-<div class="player-info"><h2 id="playerTitle">JAWRA MUSIC</h2><p id="playerChannel">YouTube • Online</p></div>
-<div class="note">ভিডিওটি YouTube-এর অনুমোদিত Player-এর মাধ্যমে চলছে।</div>
+<div class="now-playing" id="nowPlaying">
+    ভিডিও নির্বাচন করো 🎵
 </div>
 
-<div class="sound-panel" id="soundPanel">
-<div class="sound-head"><h2>😈 JAURA Sound</h2><button class="close" onclick="closeSound()">✕</button></div>
-<div class="slider"><div class="slider-label"><span>🔊 Volume</span><span id="volumeText">80%</span></div><input id="volumeControl" type="range" min="0" max="100" value="80"></div>
-<div class="slider"><div class="slider-label"><span>🎵 Bass</span><span id="bassText">50%</span></div><input id="bassControl" type="range" min="0" max="100" value="50"></div>
-<div class="slider"><div class="slider-label"><span>🎤 Vocal</span><span id="vocalText">50%</span></div><input id="vocalControl" type="range" min="0" max="100" value="50"></div>
-<div class="slider"><div class="slider-label"><span>✨ 3D Sound</span><span id="threeText">30%</span></div><input id="threeControl" type="range" min="0" max="100" value="30"></div>
-<div class="slider"><div class="slider-label"><span>🎚️ Treble</span><span id="trebleText">50%</span></div><input id="trebleControl" type="range" min="0" max="100" value="50"></div>
-<h3 style="margin:22px 0 12px">🎚️ Equalizer</h3>
-<div class="equalizer"><div class="eq"><input type="range" min="0" max="100" value="50"><span>60Hz</span></div><div class="eq"><input type="range" min="0" max="100" value="50"><span>230Hz</span></div><div class="eq"><input type="range" min="0" max="100" value="50"><span>910Hz</span></div><div class="eq"><input type="range" min="0" max="100" value="50"><span>3.6K</span></div><div class="eq"><input type="range" min="0" max="100" value="50"><span>14K</span></div></div>
-<h3 style="margin:22px 0 12px">🎵 Sound Preset</h3>
-<div class="presets"><button class="active" onclick="preset(this,'normal')">Normal</button><button onclick="preset(this,'bass')">Bass Boost</button><button onclick="preset(this,'pop')">Pop</button><button onclick="preset(this,'rock')">Rock</button><button onclick="preset(this,'vocal')">Vocal</button><button onclick="preset(this,'classical')">Classical</button></div>
+<div id="videoList">
+    <div class="status">ভিডিও লোড হচ্ছে...</div>
 </div>
 
 <script>
+
+/* =========================================
+   🔑 এখানে তোমার YouTube API KEY বসানো হয়েছে
+   ========================================= */
+
 const API_KEY = "AIzaSyB0v6AdruCXxW4ZS_xKCrB8cnc6TItXwCs";
 
-window.addEventListener("load",()=>setTimeout(()=>{const s=document.getElementById("splashScreen");if(s){s.style.opacity="0";s.style.visibility="hidden"}},2500));
 
-function searchEnter(event){if(event.key==="Enter")searchMusic()}
+/* =========================================
+   🎬 ভিডিও প্লে
+   ========================================= */
 
-async function searchMusic(){
- const input=document.getElementById("searchInput").value.trim(), results=document.getElementById("results");
- if(!input){alert("গানের নাম লিখুন");return}
- results.innerHTML='<div class="loading">🔍 YouTube-এ খোঁজা হচ্ছে...</div>';
- try{
-  const url="https://www.googleapis.com/youtube/v3/search?part=snippet&q="+encodeURIComponent(input)+"&type=video&maxResults=20&regionCode=BD&relevanceLanguage=bn&videoEmbeddable=true&key="+encodeURIComponent(API_KEY);
-  const response=await fetch(url),data=await response.json();
-  if(!response.ok)throw new Error(data.error?.message||"YouTube API Error");
-  showResults(data.items||[]);
- }catch(error){
-  results.innerHTML='<div class="error">❌ Search কাজ করছে না।<br><br>'+escapeHtml(error.message)+'</div>';
- }
+function playVideo(videoId,title){
+
+    document.getElementById("player").src =
+        "https://www.youtube.com/embed/" +
+        videoId +
+        "?autoplay=1&rel=0";
+
+    document.getElementById("nowPlaying").innerText =
+        title;
+
+    window.scrollTo({
+        top:0,
+        behavior:"smooth"
+    });
 }
 
-function showResults(items){
- const results=document.getElementById("results");
- if(!items.length){results.innerHTML='<div class="loading">কোনো ভিডিও পাওয়া যায়নি।</div>';return}
- results.innerHTML="";
- items.forEach(item=>{
-  if(!item.id?.videoId)return;
-  const videoId=item.id.videoId,title=item.snippet.title,channel=item.snippet.channelTitle;
-  const thumb=item.snippet.thumbnails?.high?.url||item.snippet.thumbnails?.medium?.url||item.snippet.thumbnails?.default?.url;
-  const card=document.createElement("div");card.className="video";card.onclick=()=>openPlayer(videoId,title,channel);
-  card.innerHTML='<div class="thumbnail-wrap"><img class="thumbnail" src="'+escapeHtml(thumb)+'" loading="lazy" alt="Video thumbnail"></div><div class="video-info"><div class="channel">🎧</div><div class="details"><div class="title-row"><div class="title">'+escapeHtml(title)+'</div><div class="more">⋮</div></div><div class="meta">'+escapeHtml(channel)+' • YouTube</div></div></div>';
-  results.appendChild(card);
- });
+
+/* =========================================
+   🏠 ওপেন করলেই জনপ্রিয় ভিডিও
+   ========================================= */
+
+async function loadHomeVideos(){
+
+    const list = document.getElementById("videoList");
+
+    list.innerHTML =
+        '<div class="status">নতুন ভিডিও লোড হচ্ছে...</div>';
+
+    try{
+
+        const url =
+        "https://www.googleapis.com/youtube/v3/videos" +
+        "?part=snippet,contentDetails" +
+        "&chart=mostPopular" +
+        "&regionCode=BD" +
+        "&maxResults=20" +
+        "&key=" + API_KEY;
+
+        const response = await fetch(url);
+        const data = await response.json();
+
+        if(data.error){
+
+            list.innerHTML =
+                '<div class="status">API Key অথবা YouTube API সেটিংসে সমস্যা আছে।</div>';
+
+            console.log(data.error);
+            return;
+        }
+
+        showVideos(data.items);
+
+    }catch(error){
+
+        list.innerHTML =
+            '<div class="status">ভিডিও লোড করা যাচ্ছে না।</div>';
+
+        console.log(error);
+    }
 }
 
-function openPlayer(videoId,title,channel){
- document.getElementById("playerTitle").textContent=decodeHtml(title);
- document.getElementById("playerChannel").textContent=channel+" • YouTube";
- let embed="https://www.youtube-nocookie.com/embed/"+encodeURIComponent(videoId)+"?autoplay=1&playsinline=1&rel=0";
- const origin=window.location.origin;
- if(origin && origin!=="null" && (origin.startsWith("http://")||origin.startsWith("https://"))){
-   embed+="&enablejsapi=1&origin="+encodeURIComponent(origin);
- }
- document.getElementById("ytFrame").src=embed;
- document.getElementById("player").style.display="block";
- document.body.style.overflow="hidden";
+
+/* =========================================
+   🔍 সার্চ
+   ========================================= */
+
+async function searchVideos(){
+
+    const query =
+        document.getElementById("searchInput").value.trim();
+
+    if(!query){
+        loadHomeVideos();
+        return;
+    }
+
+    const list = document.getElementById("videoList");
+
+    list.innerHTML =
+        '<div class="status">সার্চ করা হচ্ছে...</div>';
+
+    try{
+
+        const url =
+        "https://www.googleapis.com/youtube/v3/search" +
+        "?part=snippet" +
+        "&q=" + encodeURIComponent(query) +
+        "&type=video" +
+        "&maxResults=20" +
+        "&key=" + API_KEY;
+
+        const response = await fetch(url);
+        const data = await response.json();
+
+        if(data.error){
+
+            list.innerHTML =
+                '<div class="status">API Key অথবা API সেটিংসে সমস্যা আছে।</div>';
+
+            console.log(data.error);
+            return;
+        }
+
+        const videos = data.items.map(item => ({
+
+            id:{
+                videoId:item.id.videoId
+            },
+
+            snippet:item.snippet
+
+        }));
+
+        showVideos(videos);
+
+    }catch(error){
+
+        list.innerHTML =
+            '<div class="status">সার্চ করা যাচ্ছে না।</div>';
+
+        console.log(error);
+    }
 }
 
-function closePlayer(){document.getElementById("player").style.display="none";document.body.style.overflow="auto";document.getElementById("ytFrame").src=""}
-function openSound(){document.getElementById("soundPanel").classList.add("show")}
-function closeSound(){document.getElementById("soundPanel").classList.remove("show")}
 
-["volume","bass","vocal","three","treble"].forEach(n=>document.getElementById(n==="volume"?"volumeControl":n+"Control").addEventListener("input",function(){document.getElementById(n+"Text").innerText=this.value+"%"}));
+/* =========================================
+   📋 ভিডিও লিস্ট দেখানো
+   ========================================= */
 
-function preset(button,type){
- document.querySelectorAll(".presets button").forEach(b=>b.classList.remove("active"));button.classList.add("active");
- const vals={normal:[50,50,50,30],bass:[90,45,55,40],pop:[70,65,75,45],rock:[80,50,80,50],vocal:[35,90,65,20],classical:[55,70,70,35]}[type];
- ["bassControl","vocalControl","trebleControl","threeControl"].forEach((id,i)=>{const e=document.getElementById(id);e.value=vals[i];e.dispatchEvent(new Event("input"))});
+function showVideos(videos){
+
+    const list =
+        document.getElementById("videoList");
+
+    list.innerHTML = "";
+
+    if(!videos || videos.length === 0){
+
+        list.innerHTML =
+            '<div class="status">কোনো ভিডিও পাওয়া যায়নি।</div>';
+
+        return;
+    }
+
+    videos.forEach(video => {
+
+        const videoId =
+            video.id.videoId || video.id;
+
+        const snippet =
+            video.snippet;
+
+        const title =
+            snippet.title;
+
+        const thumbnail =
+            snippet.thumbnails.high
+            ? snippet.thumbnails.high.url
+            : snippet.thumbnails.default.url;
+
+        const channel =
+            snippet.channelTitle;
+
+        const item =
+            document.createElement("div");
+
+        item.className = "video";
+
+        item.innerHTML = `
+            <img src="${thumbnail}" alt="">
+            <div class="video-info">
+                <div class="video-title">
+                    ${escapeHTML(title)}
+                </div>
+
+                <div class="channel">
+                    ${escapeHTML(channel)}
+                </div>
+            </div>
+        `;
+
+        item.onclick = function(){
+
+            playVideo(videoId,title);
+
+        };
+
+        list.appendChild(item);
+
+    });
 }
-function categorySearch(category){
- document.querySelectorAll(".category").forEach(item=>item.classList.remove("active"));
- document.querySelectorAll(".category").forEach(item=>{if(item.innerText.toLowerCase()===(category||"All").toLowerCase())item.classList.add("active")});
- if(!category){document.getElementById("searchInput").value="";document.getElementById("results").innerHTML='<div class="home-message"><h2>JAWRA MUSIC</h2><p>গান খুঁজতে উপরের Search ব্যবহার করুন</p></div>';return}
- document.getElementById("searchInput").value=category;searchMusic();
+
+
+/* =========================================
+   🛡️ নিরাপদ Text
+   ========================================= */
+
+function escapeHTML(text){
+
+    const div =
+        document.createElement("div");
+
+    div.textContent = text;
+
+    return div.innerHTML;
 }
-function escapeHtml(text){const div=document.createElement("div");div.textContent=text||"";return div.innerHTML}
-function decodeHtml(text){const div=document.createElement("div");div.innerHTML=text||"";return div.textContent}
+
+
+/* =========================================
+   ⌨️ Enter দিয়ে সার্চ
+   ========================================= */
+
+document
+.getElementById("searchInput")
+.addEventListener("keydown",function(event){
+
+    if(event.key === "Enter"){
+        searchVideos();
+    }
+
+});
+
+
+/* =========================================
+   🚀 অ্যাপ ওপেন হলেই ভিডিও লোড
+   ========================================= */
+
+loadHomeVideos();
+
 </script><script>
 if ("serviceWorker" in navigator) {
     window.addEventListener("load", function(){
@@ -166,5 +399,6 @@ if ("serviceWorker" in navigator) {
     });
 }
 </script>
+
 </body>
 </html>
